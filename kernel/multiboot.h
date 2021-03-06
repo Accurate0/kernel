@@ -1,5 +1,6 @@
-#include <stdbool.h>
-#include <stddef.h>
+#ifndef KERNEL_MULTIBOOT_H
+#define KERNEL_MULTIBOOT_H
+
 #include <stdint.h>
 
 typedef struct
@@ -55,3 +56,5 @@ typedef struct
     uint16_t vbe_interface_off;
     uint16_t vbe_interface_len;
 } multiboot_info_t;
+
+#endif
