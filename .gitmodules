@@ -1,0 +1,6 @@
+[submodule "crosscompiler/i686-elf-binutils"]
+	path = crosscompiler/i686-elf-binutils
+	url = https://aur.archlinux.org/i686-elf-binutils.git
+[submodule "crosscompiler/i686-elf-gcc"]
+	path = crosscompiler/i686-elf-gcc
+	url = https://aur.archlinux.org/i686-elf-gcc.git
