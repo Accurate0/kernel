@@ -12,9 +12,9 @@ CHKSUM  equ -(MAGIC + FLAGS)
 
 section .multiboot
 align 4
-	dd MAGIC
-	dd FLAGS
-	dd CHKSUM
+    dd MAGIC
+    dd FLAGS
+    dd CHKSUM
 
     dd 0x00000000
     dd 0x00000000
@@ -53,5 +53,5 @@ _start:
     hlt
 
 .hang:	hlt
-	jmp .hang
+    jmp .hang
 .end:
