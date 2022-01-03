@@ -1,8 +1,9 @@
 #include <kernel/gdt.h>
 #include <kernel/idt.h>
-#include <kernel/interrupt.h>
+#include <kernel/instructions.h>
 #include <kernel/multiboot.h>
 #include <kernel/printk.h>
+#include <kernel/serial.h>
 #include <kernel/tty.h>
 
 #include <libc/stdio.h>
@@ -15,19 +16,13 @@
     for (;;)         \
         ;
 
-static inline void outb(uint16_t port, uint8_t val) {
-    __asm__ volatile("outb %0, %1" : : "a"(val), "Nd"(port));
-}
-
 void init(multiboot_info_t *info) {
-    char buffer[512] = {0};
-    /* Initialize terminal interface */
     tty_init();
-
-    printk("mem: %d -> %d\n", info->mem_lower, info->mem_upper);
-
-    gdt_install();
+    serial_init();
+    gdt_init();
     idt_init();
+
+    printk(PRINTK_SERIAL | PRINTK_TTY, "mem: %d -> %d\n", info->mem_lower, info->mem_upper);
 
     // mask all but keyboard interrupts
     outb(0x21, 0xfd);

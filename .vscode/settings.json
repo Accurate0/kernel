@@ -16,7 +16,10 @@
         "cstdint": "c",
         "random": "c",
         "stop_token": "c",
-        "tty.h": "c"
+        "tty.h": "c",
+        "instructions.h": "c",
+        "cstdio": "cpp",
+        "printk.h": "c"
     },
     "cSpell.words": [
         "idtr",

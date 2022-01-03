@@ -19,7 +19,7 @@ void gdt_set_gate(int num, unsigned long base, unsigned long limit, unsigned cha
 
 extern void gdt_flush();
 
-void gdt_install() {
+void gdt_init() {
     _gp.limit = (sizeof(struct gdt_entry) * 4) - 1;
     _gp.base = (uint32_t)&gdt;
 

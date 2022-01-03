@@ -16,5 +16,5 @@ struct gdt_ptr {
     uint32_t base;
 } __attribute__((packed));
 
-void gdt_install();
+void gdt_init();
 #endif
