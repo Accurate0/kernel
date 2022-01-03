@@ -14,7 +14,7 @@ enum printk_output
     PRINTK_TTY = 2,
 };
 
-static inline int printk(enum printk_output output, const char *s, ...) {
+static inline int printk(int output, const char *s, ...) {
     char buf[256] = {0};
 
     va_list args;

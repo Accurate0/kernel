@@ -10,11 +10,7 @@
 
 #include <ext/printf.h>
 
-#define VERSION "0.1"
-
-#define KEEP_ALIVE() \
-    for (;;)         \
-        ;
+extern void kmain();
 
 void init(multiboot_info_t *info) {
     tty_init();
@@ -29,5 +25,5 @@ void init(multiboot_info_t *info) {
     outb(0xa1, 0xff);
     sti();
 
-    KEEP_ALIVE();
+    kmain();
 }
