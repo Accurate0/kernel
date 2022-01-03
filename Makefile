@@ -16,7 +16,7 @@ run: $(TARGET)
 	qemu-system-i386 -kernel $(TARGET) -enable-kvm -machine q35 -device intel-iommu -vga std
 
 $(TARGET): $(BOOTOBJ) $(OBJ)
-	$(CC) -T linker.ld -o $(TARGET) $(CFLAGS) $(LDFLAGS) $(BOOTOBJ) $(OBJ) -lgcc
+	$(CC) -T kernel/linker.ld -o $(TARGET) $(CFLAGS) $(LDFLAGS) $(BOOTOBJ) $(OBJ) -lgcc
 
 .c.o:
 	$(CC) $(CFLAGS) -o $@ -c $<
