@@ -15,7 +15,8 @@
         "chrono": "c",
         "cstdint": "c",
         "random": "c",
-        "stop_token": "c"
+        "stop_token": "c",
+        "tty.h": "c"
     },
     "cSpell.words": [
         "idtr",

@@ -23,5 +23,6 @@ typedef enum tty_vga_color
 
 void tty_init();
 void tty_print(const char *s);
+void tty_putchar(char c);
 void tty_set_color(vga_color_t fg, vga_color_t bg);
 #endif
