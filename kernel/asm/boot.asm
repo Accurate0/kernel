@@ -50,8 +50,6 @@ _start:
     call init
     ; shouldn't return but
 
-    hlt
-
 .hang:	hlt
     jmp .hang
 .end:

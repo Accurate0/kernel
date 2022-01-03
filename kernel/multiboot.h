@@ -3,8 +3,7 @@
 
 #include <stdint.h>
 
-typedef struct
-{
+typedef struct {
     /* Multiboot info version number */
     uint32_t flags;
 
@@ -21,7 +20,6 @@ typedef struct
     /* Boot-Module list */
     uint32_t mods_count;
     uint32_t mods_addr;
-
 
     //  syms
     uint8_t padding[12];
