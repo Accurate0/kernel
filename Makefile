@@ -1,8 +1,8 @@
 CC=i686-elf-gcc
 CFLAGS=-Wall -std=c99 -Wextra -ffreestanding -O2
-CFLAGS+=-Ikernel -Ilibc/include -DLIBK
+CFLAGS+=-Ikernel/include -Ilibc/include -Iext/include
 LDFLAGS=-nostdlib
-SOURCES=$(wildcard kernel/*.c libc/*.c)
+SOURCES=$(wildcard kernel/*.c libc/*.c ext/*.c)
 OBJ=${SOURCES:.c=.o}
 
 ASM=nasm
@@ -22,6 +22,12 @@ $(TARGET): $(BOOTOBJ) $(OBJ)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 kernel/asm/boot.o: kernel/asm/boot.asm
+	$(ASM) $(ASMFLAGS) $< -o $@
+
+kernel/asm/gdt.o: kernel/asm/gdt.asm
+	$(ASM) $(ASMFLAGS) $< -o $@
+
+kernel/asm/isr.o: kernel/asm/isr.asm
 	$(ASM) $(ASMFLAGS) $< -o $@
 
 .asm.o:

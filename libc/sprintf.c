@@ -4,9 +4,7 @@
 
 #include <libc/string.h>
 
-int snprintf(char *str, size_t size, const char *format, ...) {
-    va_list args;
-    va_start(args, format);
+int vsnprintf(char *str, size_t size, const char *format, va_list args) {
     size_t current = 0;
 
     for (;;) {
@@ -72,10 +70,17 @@ int snprintf(char *str, size_t size, const char *format, ...) {
         }
     }
 
-    va_end(args);
-
 end_string:
     str[current] = '\0';
 
     return current;
+}
+
+int snprintf(char *str, size_t size, const char *format, ...) {
+    va_list args;
+    va_start(args, format);
+    int len = vsnprintf(str, size, format, args);
+    va_end(args);
+
+    return len;
 }

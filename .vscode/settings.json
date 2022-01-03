@@ -1,5 +1,24 @@
 {
     "files.associations": {
-        "stdio.h": "c"
-    }
+        "*.inc": "c",
+        "bspwmrc": "fish",
+        "stdio.h": "c",
+        "interrupt.h": "c",
+        "multiboot.h": "c",
+        "idt.h": "c",
+        "stdint.h": "c",
+        "string.h": "c",
+        "stddef.h": "c",
+        "stdbool.h": "c",
+        "atomic": "c",
+        "*.tcc": "c",
+        "chrono": "c",
+        "cstdint": "c",
+        "random": "c",
+        "stop_token": "c"
+    },
+    "cSpell.words": [
+        "idtr",
+        "printk"
+    ]
 }

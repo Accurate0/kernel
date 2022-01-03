@@ -35,14 +35,10 @@ stack_bottom:
 resb 16384 ; 16 KiB
 stack_top:
 
-
 section .text
 ; fixed symbol size
 global _start:function (_start.end - _start)
 _start:
-    ; turn off interrupts
-    cli
-
     ; setup stack to call into C
     mov esp, stack_top
     push ebx
