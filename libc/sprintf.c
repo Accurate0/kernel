@@ -19,6 +19,13 @@ int vsnprintf(char *str, size_t size, const char *format, va_list args) {
                     int len = strlen(str_arg);
                     memcpy(str + current, str_arg, len);
                     current += len;
+                    format++;
+                    break;
+
+                case 'c':
+                    const int c_arg = va_arg(args, int);
+                    str[current++] = c_arg;
+                    format++;
                     break;
 
                 case 'd': {

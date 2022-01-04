@@ -51,7 +51,7 @@ void keyboard_handler(register_t *r) {
             // Key release
         } else {
             // Key down
-            printk(PRINTK_SERIAL | PRINTK_TTY, "Key pressed %c\n", kbdus[scancode]);
+            printk(PRINTK_SERIAL | PRINTK_TTY, "Key pressed '%c'\n", kbdus[scancode]);
             // Send message to the focus window
         }
     }

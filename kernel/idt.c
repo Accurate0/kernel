@@ -2,7 +2,6 @@
 
 #include <kernel/idt.h>
 #include <kernel/isr.h>
-#include <kernel/pic.h>
 #include <kernel/printk.h>
 #include <kernel/tty.h>
 
@@ -15,7 +14,6 @@ void idt_init() {
     memset(idt_entries, 0, sizeof(idt_entries));
     idt_ptr.base = (uint32_t)idt_entries;
     idt_ptr.limit = sizeof(idt_entries) - 1;
-    pic_init();
 
     idt_set_entry(0, (uint32_t)exception0, 0x08, 0x8E);
     idt_set_entry(1, (uint32_t)exception1, 0x08, 0x8E);

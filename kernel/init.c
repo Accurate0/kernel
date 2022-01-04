@@ -8,19 +8,13 @@
 #include <kernel/serial.h>
 #include <kernel/tty.h>
 
-#include <libc/stdio.h>
-
-// C++
-extern void kmain();
-extern void keyboard_handler(void);
-
 void init(multiboot_info_t *info) {
     tty_init();
     serial_init();
     gdt_init();
     idt_init();
+    pic_init();
     keyboard_init();
-    // pic_init();
 
     printk(PRINTK_SERIAL | PRINTK_TTY, "mem: %d -> %d\n", info->mem_lower, info->mem_upper);
 
@@ -28,6 +22,8 @@ void init(multiboot_info_t *info) {
     outb(0x21, 0xfd);
     outb(0xa1, 0xff);
     sti();
+
+    printk(PRINTK_TTY | PRINTK_SERIAL, "%s %d %c\n", "test", 20, 'f');
 
     for (;;) {
     }

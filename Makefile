@@ -2,8 +2,8 @@ CC=i686-elf-gcc
 CFLAGS=-Wall -std=c99 -Wextra -ffreestanding -ggdb -mgeneral-regs-only
 CFLAGS+=-Ikernel/include -Ilibc/include -Iext/include
 LDFLAGS=-nostdlib
-SOURCES=$(wildcard kernel/*.c libc/*.c ext/*.c)
-HEADERS=$(wildcard kernel/include/kernel*.h libc/include/libc/*.h ext/include/ext/*.h)
+SOURCES=$(wildcard kernel/*.c libc/*.c)
+HEADERS=$(wildcard kernel/include/kernel*.h libc/include/libc/*.h)
 OBJ=${SOURCES:.c=.o}
 
 ASM=$(wildcard kernel/asm/*.s)
