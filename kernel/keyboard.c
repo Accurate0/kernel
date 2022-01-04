@@ -35,7 +35,7 @@ char kbdus[128] = {
     0,                                                   /* All other keys are undefined */
 };
 
-void keyboard_handler(register_t *r) {
+void keyboard_handler(__attribute__((unused)) register_t *r) {
     int i, scancode;
     // get scancode with "timeout"
     for (i = 1000; i > 0; i++) {
