@@ -3,6 +3,20 @@
 
 #include <stdint.h>
 
+typedef struct aout_symbol_table {
+    unsigned long tabsize;
+    unsigned long strsize;
+    unsigned long addr;
+    unsigned long reserved;
+} multiboot_aout_symbol_table_t;
+
+typedef struct elf_section_header_table {
+    unsigned long num;
+    unsigned long size;
+    unsigned long addr;
+    unsigned long shndx;
+} multiboot_elf_section_header_table_t;
+
 typedef struct {
     /* Multiboot info version number */
     uint32_t flags;
@@ -22,12 +36,10 @@ typedef struct {
     uint32_t mods_addr;
 
     //  syms
-    uint8_t padding[12];
-    // union
-    // {
-    //     multiboot_aout_symbol_table_t aout_sym;
-    //     multiboot_elf_section_header_table_t elf_sec;
-    // } u;
+    union {
+        multiboot_aout_symbol_table_t aout_sym;
+        multiboot_elf_section_header_table_t elf_sec;
+    } u;
 
     /* Memory Mapping buffer */
     uint32_t mmap_length;

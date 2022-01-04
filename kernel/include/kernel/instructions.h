@@ -23,3 +23,7 @@ static inline uint8_t inb(uint16_t port) {
     __asm__ volatile("inb %1, %0" : "=a"(ret) : "Nd"(port));
     return ret;
 }
+
+static inline void io_wait(void) {
+    outb(0x80, 0);
+}

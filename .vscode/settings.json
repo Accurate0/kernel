@@ -19,7 +19,11 @@
         "tty.h": "c",
         "instructions.h": "c",
         "cstdio": "cpp",
-        "printk.h": "c"
+        "printk.h": "c",
+        "serial.h": "c",
+        "pic.h": "c",
+        "stdarg.h": "c",
+        "gdt.h": "c"
     },
     "cSpell.words": [
         "idtr",

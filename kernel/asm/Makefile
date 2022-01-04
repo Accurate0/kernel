@@ -1,12 +1,12 @@
 
 ASM=nasm
-ASMFLAGS=-felf32
-ASM_FILES=$(wildcard *.asm)
-OBJ=${ASM_FILES:.asm=.o}
+ASMFLAGS=-felf32 -g
+ASM_FILES=$(wildcard *.s)
+OBJ=${ASM_FILES:.s=.o}
 
-all: $(OBJ)
+all: $(OBJ) $(ASM_FILES)
 
-%.o : %.asm
+%.o : %.s
 	$(ASM) $(ASMFLAGS) $< -o $@
 
 clean:
