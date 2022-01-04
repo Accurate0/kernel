@@ -8,7 +8,7 @@
 #include <kernel/serial.h>
 #include <kernel/tty.h>
 
-void init(multiboot_info_t *info) {
+void kmain(multiboot_info_t *info) {
     tty_init();
     serial_init();
     gdt_init();

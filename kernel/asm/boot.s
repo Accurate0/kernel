@@ -44,7 +44,7 @@ _start:
     mov esp, stack_top
     push ebx
 
-    call init
+    call kmain
     ; shouldn't return but
 
 .hang:	hlt
