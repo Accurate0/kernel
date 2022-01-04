@@ -57,5 +57,5 @@ void keyboard_handler(__attribute__((unused)) register_t *r) {
     }
 }
 void keyboard_init() {
-    register_interrupt_handler(33, keyboard_handler);
+    register_interrupt_handler(IRQ1_Keyboard, keyboard_handler);
 }

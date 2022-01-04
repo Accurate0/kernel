@@ -2,7 +2,6 @@
 ; magic    - 0
 ; flags    - 4
 ; checksum - 8
-extern init
 MBALIGN equ 1 << 0
 MEMINFO equ 1 << 1
 VIDMODE equ 1 << 2
@@ -38,7 +37,7 @@ stack_top:
 section .text
 ; fixed symbol size
 global _start:function (_start.end - _start)
-
+extern kmain
 _start:
     ; setup stack to call into C
     mov esp, stack_top

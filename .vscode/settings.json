@@ -23,7 +23,8 @@
         "serial.h": "c",
         "pic.h": "c",
         "stdarg.h": "c",
-        "gdt.h": "c"
+        "gdt.h": "c",
+        "isr.h": "c"
     },
     "cSpell.words": [
         "idtr",
