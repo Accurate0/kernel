@@ -2,8 +2,8 @@
 #define KERNEL_PRINTK_H
 enum
 {
-    PRINTK_SERIAL = 1,
-    PRINTK_TTY = 2,
+    PRINTK_SERIAL = 1 << 0,
+    PRINTK_TTY = 1 << 1,
 };
 int printk(int output, const char *s, ...);
 #endif

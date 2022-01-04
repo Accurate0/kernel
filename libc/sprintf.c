@@ -41,20 +41,25 @@ int vsnprintf(char *str, size_t size, const char *format, va_list args) {
                         int_val = -int_val;
                     }
 
-                    // int max '2147483647'
-                    char buf[11] = {0};
-                    for (int i = 0; int_val > 0; int_val /= 10, i++) {
-                        if (current >= size)
-                            goto end_string;
+                    // this is a slightly deranged thing to do
+                    if (int_val == 0) {
+                        str[current++] = '0';
+                    } else {
+                        // int max '2147483647'
+                        char buf[11] = {0};
+                        for (int i = 0; int_val > 0; int_val /= 10, i++) {
+                            if (current >= size)
+                                goto end_string;
 
-                        buf[i] = integer_map[int_val % 10];
-                    }
+                            buf[i] = integer_map[int_val % 10];
+                        }
 
-                    for (int i = strlen(buf) - 1; i >= 0; i--) {
-                        if (current >= size)
-                            goto end_string;
+                        for (int i = strlen(buf) - 1; i >= 0; i--) {
+                            if (current >= size)
+                                goto end_string;
 
-                        str[current++] = buf[i];
+                            str[current++] = buf[i];
+                        }
                     }
 
                     format++;

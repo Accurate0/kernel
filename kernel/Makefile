@@ -10,6 +10,7 @@ HEADERS=$(wildcard include/kernel*.h)
 OBJ=${SOURCES:.c=.o}
 
 LIBC=$(LIBC_PATH)/libc.a
+LIBC_FILES=$(wildcard $(LIBC_PATH)/*.c) $(wildcard $(LIBC_PATH)/include/libc/*.h)
 
 ASM=$(wildcard asm/*.s)
 ASSEMBLY_OBJ=${ASM:.s=.o}
@@ -22,7 +23,7 @@ $(TARGET): $(ASSEMBLY_OBJ) $(OBJ) $(HEADERS) $(LIBC)
 .c.o:
 	$(CC) $(CFLAGS) -o $@ -c $<
 
-$(LIBC):
+$(LIBC): $(LIBC_FILES)
 	$(MAKE) -C $(LIBC_PATH)
 
 $(ASSEMBLY_OBJ): $(ASM)

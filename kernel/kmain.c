@@ -23,7 +23,7 @@ void kmain(multiboot_info_t *info) {
     outb(0xa1, 0xff);
     sti();
 
-    printk(PRINTK_TTY | PRINTK_SERIAL, "%s %d %c\n", "test", 20, 'f');
+    printk(PRINTK_TTY | PRINTK_SERIAL, "%s %d %c\n", "test", 0, 'f');
 
     for (;;) {
     }
