@@ -1,10 +1,11 @@
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdint.h>
 
 #include <libc/string.h>
 
-int vsnprintf(char *str, size_t size, const char *format, va_list args) {
+int vsprintf(char *str, const char *format, va_list args) {
     size_t current = 0;
 
     for (;;) {
@@ -22,6 +23,31 @@ int vsnprintf(char *str, size_t size, const char *format, va_list args) {
                     format++;
                     break;
 
+                case 'x':
+                    int int_val = va_arg(args, int);
+                    char buf[12] = {0};
+                    static const char hex_map[] = {"0123456789ABCDEF"};
+
+                    int i = 0;
+                    while (1) {
+                        buf[i++] = hex_map[int_val % 16];
+                        int_val /= 16;
+
+                        if (int_val == 0)
+                            break;
+                    }
+
+                    str[current++] = '0';
+                    str[current++] = 'x';
+
+                    for (int i = strlen(buf) - 1; i >= 0; i--) {
+                        str[current++] = buf[i];
+                    }
+
+                    memcpy(str + current, buf, strlen(buf));
+                    format++;
+                    break;
+
                 case 'c':
                     const int c_arg = va_arg(args, int);
                     str[current++] = c_arg;
@@ -33,35 +59,26 @@ int vsnprintf(char *str, size_t size, const char *format, va_list args) {
                     int int_val = va_arg(args, int);
                     bool neg = int_val < 0;
 
-                    if (current >= size)
-                        goto end_string;
-
                     if (neg) {
                         str[current++] = '-';
                         int_val = -int_val;
                     }
+                    char buf[64] = {0};
 
-                    // this is a slightly deranged thing to do
-                    if (int_val == 0) {
-                        str[current++] = '0';
-                    } else {
-                        // int max '2147483647'
-                        char buf[11] = {0};
-                        for (int i = 0; int_val > 0; int_val /= 10, i++) {
-                            if (current >= size)
-                                goto end_string;
+                    int i = 0;
+                    while (1) {
+                        buf[i++] = integer_map[int_val % 10];
+                        int_val /= 10;
 
-                            buf[i] = integer_map[int_val % 10];
-                        }
-
-                        for (int i = strlen(buf) - 1; i >= 0; i--) {
-                            if (current >= size)
-                                goto end_string;
-
-                            str[current++] = buf[i];
-                        }
+                        if (int_val == 0)
+                            break;
                     }
 
+                    for (int i = strlen(buf) - 1; i >= 0; i--) {
+                        str[current++] = buf[i];
+                    }
+
+                    memcpy(str + current, buf, strlen(buf));
                     format++;
                 } break;
             }
@@ -71,33 +88,25 @@ int vsnprintf(char *str, size_t size, const char *format, va_list args) {
             format++;
             switch (*format) {
                 case 'n': {
-                    if (current < size)
-                        goto end_string;
-
                     str[current] = '\n';
                 } break;
             }
         }
 
-        if (current < size) {
-            str[current] = *format;
-            format++;
-            current++;
-        } else {
-            goto end_string;
-        }
+        str[current] = *format;
+        format++;
+        current++;
     }
 
-end_string:
     str[current] = '\0';
 
     return current;
 }
 
-int snprintf(char *str, size_t size, const char *format, ...) {
+int sprintf(char *str, const char *format, ...) {
     va_list args;
     va_start(args, format);
-    int len = vsnprintf(str, size, format, args);
+    int len = vsprintf(str, format, args);
     va_end(args);
 
     return len;

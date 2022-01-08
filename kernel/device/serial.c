@@ -1,7 +1,4 @@
 #include <kernel/instructions.h>
-#include <kernel/serial.h>
-
-#include <libc/string.h>
 
 #define SERIAL_PORT 0x3f8 // COM1
 
@@ -38,11 +35,11 @@ void serial_putchar(char a) {
     outb(SERIAL_PORT, a);
 }
 
-void serial_write(const char *data, size_t size) {
-    for (size_t i = 0; i < size; i++)
-        serial_putchar(data[i]);
+void serial_write(const char *data) {
+    while (*data)
+        serial_putchar(*data++);
 }
 
 void serial_print(const char *s) {
-    serial_write(s, strlen(s));
+    serial_write(s);
 }

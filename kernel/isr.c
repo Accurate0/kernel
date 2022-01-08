@@ -1,6 +1,6 @@
+#include <kernel/device/pic.h>
 #include <kernel/instructions.h>
 #include <kernel/isr.h>
-#include <kernel/pic.h>
 #include <kernel/printk.h>
 
 #include <stddef.h>
@@ -59,7 +59,6 @@ void register_interrupt_handler(int num, isr_t handler) {
 }
 
 void final_irq_handler(register_t *reg) {
-    printk(PRINTK_SERIAL | PRINTK_TTY, "irq %d\n", reg->int_no);
     if (interrupt_handlers[reg->int_no] != NULL) {
         isr_t handler = interrupt_handlers[reg->int_no];
         handler(reg);

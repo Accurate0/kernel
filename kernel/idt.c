@@ -1,9 +1,9 @@
 #include <stdbool.h>
 
+#include <kernel/device/tty.h>
 #include <kernel/idt.h>
 #include <kernel/isr.h>
 #include <kernel/printk.h>
-#include <kernel/tty.h>
 
 #include <libc/string.h>
 
@@ -66,7 +66,6 @@ void idt_init() {
     idt_set_entry(128, (uint32_t)exception128, 0x08, 0x8E);
 
     idt_flush((uint32_t) & (idt_ptr));
-    __asm__ volatile("sti");
 }
 
 void idt_set_entry(int index, uint32_t base, uint16_t sel, uint8_t flags) {

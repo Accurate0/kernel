@@ -1,5 +1,4 @@
-#ifndef KERNEL_SERIAL_H
-#define KERNEL_SERIAL_H
+#pragma once
 #include <stddef.h>
 
 void serial_init();
@@ -11,4 +10,3 @@ void serial_print(const char *s);
 #define SERIAL_ANSI_YELLOW "\e[33m"
 #define SERIAL_ANSI_BLUE   "\e[34m"
 #define SERIAL_ANSI_RESET  "\e[0m"
-#endif

@@ -4,3 +4,6 @@
 [submodule "crosscompiler/i686-elf-gcc"]
 	path = crosscompiler/i686-elf-gcc
 	url = https://aur.archlinux.org/i686-elf-gcc.git
+[submodule "libc/ext/printf"]
+	path = libc/ext/printf
+	url = https://github.com/mpaland/printf.git

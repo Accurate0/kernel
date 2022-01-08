@@ -1,5 +1,4 @@
-#ifndef KERNEL_GDT_H
-#define KERNEL_GDT_H
+#pragma once
 #include <stdint.h>
 
 #define NUM_DESCRIPTORS 8
@@ -22,5 +21,3 @@ extern void gdt_flush(uint32_t gdt_ptr);
 
 void gdt_init();
 void gdt_set_entry(int index, uint32_t base, uint32_t limit, uint8_t access, uint8_t gran);
-
-#endif

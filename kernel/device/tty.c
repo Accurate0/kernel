@@ -1,9 +1,11 @@
+#include <kernel/device/tty.h>
+#include <kernel/printk.h>
+
+#include <libc/string.h>
+
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
-
-#include <kernel/tty.h>
-#include <libc/string.h>
 
 static inline uint8_t vga_entry_color(enum tty_vga_color fg, enum tty_vga_color bg) {
     return fg | bg << 4;
@@ -22,17 +24,21 @@ size_t terminal_column;
 uint8_t terminal_color;
 uint16_t *terminal_buffer;
 
-void tty_init(void) {
-    terminal_row = 0;
-    terminal_column = 0;
-    terminal_color = vga_entry_color(VGA_COLOR_WHITE, VGA_COLOR_BLACK);
-    terminal_buffer = (uint16_t *)0xB8000;
+void tty_clear(void) {
     for (size_t y = 0; y < VGA_HEIGHT; y++) {
         for (size_t x = 0; x < VGA_WIDTH; x++) {
             const size_t index = y * VGA_WIDTH + x;
             terminal_buffer[index] = vga_entry(' ', terminal_color);
         }
     }
+}
+
+void tty_init(void) {
+    terminal_row = 0;
+    terminal_column = 0;
+    terminal_color = vga_entry_color(VGA_COLOR_WHITE, VGA_COLOR_BLACK);
+    terminal_buffer = (uint16_t *)0xB8000;
+    tty_clear();
 }
 
 void tty_set_color(enum tty_vga_color fg, enum tty_vga_color bg) {
@@ -55,16 +61,27 @@ void tty_putchar(char c) {
     tty_put(c, terminal_color, terminal_column, terminal_row);
     if (++terminal_column >= VGA_WIDTH) {
         terminal_column = 0;
-        if (++terminal_row >= VGA_HEIGHT)
-            terminal_row = 0;
+    }
+
+    if (terminal_row >= VGA_HEIGHT) {
+        terminal_row = 0;
+        tty_clear();
+
+        // memmove(terminal_buffer, terminal_buffer + VGA_WIDTH, (VGA_WIDTH * VGA_HEIGHT) -
+        // VGA_WIDTH);
+
+        // for (size_t x = 0; x < VGA_WIDTH; x++) {
+        //     const size_t index = VGA_HEIGHT * VGA_WIDTH + x;
+        //     terminal_buffer[index] = vga_entry(' ', terminal_color);
+        // }
     }
 }
 
-void tty_write(const char *data, size_t size) {
-    for (size_t i = 0; i < size; i++)
-        tty_putchar(data[i]);
+void tty_write(const char *data) {
+    while (*data)
+        tty_putchar(*data++);
 }
 
 void tty_print(const char *data) {
-    tty_write(data, strlen(data));
+    tty_write(data);
 }

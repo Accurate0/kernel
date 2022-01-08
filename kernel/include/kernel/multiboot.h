@@ -1,5 +1,4 @@
-#ifndef KERNEL_MULTIBOOT_H
-#define KERNEL_MULTIBOOT_H
+#pragma once
 
 #include <stdint.h>
 
@@ -16,6 +15,20 @@ typedef struct elf_section_header_table {
     unsigned long addr;
     unsigned long shndx;
 } multiboot_elf_section_header_table_t;
+
+typedef struct multiboot_mmap_entry {
+    uint32_t size;
+    uint32_t addr_low;
+    uint32_t addr_high;
+    uint32_t len_low;
+    uint32_t len_high;
+#define MULTIBOOT_MEMORY_AVAILABLE        1
+#define MULTIBOOT_MEMORY_RESERVED         2
+#define MULTIBOOT_MEMORY_ACPI_RECLAIMABLE 3
+#define MULTIBOOT_MEMORY_NVS              4
+#define MULTIBOOT_MEMORY_BADRAM           5
+    uint32_t type;
+} __attribute__((packed)) multiboot_memory_map_t;
 
 typedef struct {
     /* Multiboot info version number */
@@ -66,5 +79,3 @@ typedef struct {
     uint16_t vbe_interface_off;
     uint16_t vbe_interface_len;
 } multiboot_info_t;
-
-#endif

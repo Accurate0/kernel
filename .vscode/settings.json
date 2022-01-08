@@ -24,7 +24,9 @@
         "pic.h": "c",
         "stdarg.h": "c",
         "gdt.h": "c",
-        "isr.h": "c"
+        "isr.h": "c",
+        "keyboard.h": "c",
+        "printf.h": "c"
     },
     "cSpell.words": [
         "idtr",

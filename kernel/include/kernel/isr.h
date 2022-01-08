@@ -1,5 +1,4 @@
-#ifndef KERNEL_ISR_H
-#define KERNEL_ISR_H
+#pragma once
 
 #include <stdint.h>
 
@@ -95,5 +94,3 @@ extern void irq15();
 #define IRQ13_FPU       (IRQ_2_BASE + 0x05)
 #define IRQ14_HARD_DISK (IRQ_2_BASE + 0x06)
 #define IRQ15_RESERVED  (IRQ_2_BASE + 0x07)
-
-#endif

@@ -1,6 +1,6 @@
+#include <kernel/device/pic.h>
 #include <kernel/instructions.h>
 #include <kernel/isr.h>
-#include <kernel/pic.h>
 
 #define PIC1         0x20
 #define PIC2         0xA0
@@ -13,11 +13,6 @@
 #define ICW1 0x11
 #define ICW4 0x01
 
-/*
- * PIC is very complex, for a better understanding, visist
- * http://www.brokenthorn.com/Resources/OSDevPic.html or some other materials that explain PIC,
- * otherwise the following code is impossible to uderstand....
- * */
 void pic_init() {
     // ICW1
     outb(PIC1_COMMAND, ICW1);

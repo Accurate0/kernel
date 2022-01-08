@@ -52,7 +52,6 @@ void keyboard_handler(__attribute__((unused)) register_t *r) {
         } else {
             // Key down
             printk(PRINTK_SERIAL | PRINTK_TTY, "Key pressed '%c'\n", kbdus[scancode]);
-            // Send message to the focus window
         }
     }
 }

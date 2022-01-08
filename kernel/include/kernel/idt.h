@@ -1,5 +1,4 @@
-#ifndef KERNEL_IDT_H
-#define kERNEL_IDT_H
+#pragma once
 #include <stdint.h>
 
 #define NUM_IDT_ENTRIES 256
@@ -21,5 +20,3 @@ extern void idt_flush(uint32_t ptr);
 
 void idt_init();
 void idt_set_entry(int index, uint32_t base, uint16_t sel, uint8_t ring);
-
-#endif

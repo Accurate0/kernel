@@ -6,6 +6,7 @@ size_t strlen(const char *str) {
         ;
     return str - a;
 }
+
 size_t strnlen(const char *str, size_t n) {
     size_t current = 0;
     const char *p = str;
