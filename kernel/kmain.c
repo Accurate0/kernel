@@ -10,6 +10,8 @@
 #include <kernel/panic.h>
 #include <kernel/printk.h>
 
+extern void kmain_rs();
+
 void kmain(multiboot_info_t *mb_info) {
     tty_init();
     serial_init();
@@ -26,8 +28,5 @@ void kmain(multiboot_info_t *mb_info) {
     outb(0xa1, 0xff);
     sti();
 
-    for (;;) {
-    }
-
-    printk(PRINTK_SERIAL | PRINTK_TTY, "uh oh\n");
+    kmain_rs();
 }
